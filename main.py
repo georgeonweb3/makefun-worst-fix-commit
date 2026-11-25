@@ -52,6 +52,10 @@ LINE = (
 
 
 def main() -> None:
+    # Gate validation: the competition requires one line, 1-100 chars.
+    # Fail loudly instead of writing an entry the judge would reject.
+    if "\n" in LINE or not 1 <= len(LINE) <= 100:
+        raise ValueError(f"entry violates the 1-100 char one-line gate: {len(LINE)} chars")
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(LINE)
